@@ -1,0 +1,22 @@
+{
+  "name": "dtrangepicker",
+  "version": "0.0.0",
+  "authors": [
+    "ujjwal <ujjwal.narayan@gmail.com>"
+  ],
+  "description": "Angular directive for selecting datetime range (Start and End datetime)",
+  "main": "dtrangepicker.js",
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
