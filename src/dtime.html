@@ -1,0 +1,22 @@
+<span class="date" ng-click="select()">
+    {{ selectedDate | date:'short' }}    
+</span>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th><a href="#" ng-click="prevMonth()">prev</a></th>
+            <th colspan="5">{{ selectedDate | date: 'MMMM yyyy' }}</th>
+            <th><a href="#" ng-click="nextMonth()">next</a></th>
+        </tr>
+        <tr>
+            <th ng-repeat="dow in dows track by $index">{{ dow }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="week in calendar track by $index">
+            <td ng-repeat="day in week track by $index">
+                {{ day | date:'dd' }}
+            </td>
+        </tr>
+    </tbody>
+</table>
