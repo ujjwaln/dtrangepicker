@@ -105,7 +105,6 @@
                         scope.selectedDates = [dt];
                         
                     }
-                    console.log(scope.selectedDates);
                 };
 
                 scope.getDateClass = function(dt) {
@@ -141,36 +140,3 @@
     });
 
 })(window.angular);
-
-
-
-
-                
-               /*
-                scope.paintCalendar = function() {
-                                   
-                                   if (!scope.dt_start)
-                                       return;
-               
-                                   if (!scope.dt_end) {
-                                       for (var i = 0; i < scope.calendar.length; i++) {
-                                           for (var j = 0; j < scope.calendar[i].length; j++) {
-                                               var o = scope.calendar[i][j];
-                                               var startDOY = getDOY(scope.dt_start);
-                                               var endDOY = getDOY(scope.dt_end);
-               
-                                               if ((o.doy == startDOY) || (o.doy == endDOY)) {
-                                                   o.current = true;
-                                               } else {
-                                                   o.current = false;
-                                               }
-                                               if ((o.doy >= startDOY) && (o.doy <= endDOY)) {
-                                                   o.inrange = true;
-                                               } else {
-                                                   o.inrange = false;
-                                               }
-                                           }
-                                       }
-                                   }
-                               };*/
-               

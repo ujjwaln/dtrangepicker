@@ -16,8 +16,12 @@
                         var range2 = [start + 2 * 24*3600*1000, start + 4 * 24*3600*1000];
                         var range3 = [start + 6 * 24*3600*1000, start + 9 * 24*3600*1000];
                         
-                        $scope.dates = [range1, range2, range3];
-                        console.log($scope.dates);
+                        $scope.inactive_dates = [range1, range2, range3];
+                        $scope.selected = [];
+                        
+                        $scope.$watch('selected', function() {
+                            console.log($scope.selected);
+                        });
                     }]);
             })(window.angular);
         </script>
@@ -26,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" ng-controller="appCtrl">
-                    <dtrange inactive-dates="dates">
+                    <dtrange inactive-dates="inactive_dates" selected-dates="selected">
                 </div>
             </div>
         </div>
