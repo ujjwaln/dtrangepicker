@@ -46,7 +46,8 @@
             
             restrict : 'E',
             
-            templateUrl : './src/dtrangepicker.html',
+            templateUrl : './src/dtrangepicker.html', 
+            //templateUrl : './bower_components/dtrangepicker/src/dtrangepicker.html',
             
             scope : {
                 selectedDates: '=',
@@ -67,9 +68,13 @@
                     }
                 });
                 
+                var watchRemover = 
                 scope.$watch('selectedDates', function(val) {
                     if (!val || val.length == 0) {
                         scope.dt_calendar = new Date();
+                        watchRemover();
+                        scope.selectedDates = [];
+                        
                     } else {
                         scope.dt_calendar = scope.selectedDates[0];
                     }
@@ -140,21 +145,25 @@
                     var inrange = false,
                         selected = false;
                         
-                    for (var i=0, il=scope.inactiveDates.length; i<il; i++) {
-                        if (dt.value >= scope.inactiveDates[i][0] && dt.value <= scope.inactiveDates[i][1]) {
-                          inrange=true;
-                          break;
+                    if (scope.inactiveDates && scope.inactiveDates.length) {
+                        for (var i=0, il=scope.inactiveDates.length; i<il; i++) {
+                            if (dt.value >= scope.inactiveDates[i][0] && dt.value <= scope.inactiveDates[i][1]) {
+                              inrange=true;
+                              break;
+                            }
                         }
                     }
                     
-                    if ((dt.value == scope.selectedDates[0]) ||
+                    if (scope.selectedDates && scope.selectedDates.length) {
+                        if ((dt.value == scope.selectedDates[0]) ||
                         (dt.value >= scope.selectedDates[0] && dt.value <= scope.selectedDates[1])) 
-                    {
-                        selected = true;
+                        {
+                            selected = true;
+                        }
                     }
                     
                     var classes = "";
-                    if (dt.value < scope.minDate) {
+                    if (scope.minDate && (dt.value < scope.minDate)) {
                         classes = "disabled";
                     }
                     
