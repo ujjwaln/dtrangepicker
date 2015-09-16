@@ -12,6 +12,7 @@
                     .controller("appCtrl", ["$scope", function($scope) {
                         
                         var start = Date.now();
+                        $scope.minDate = start - 3 * 24*3600*1000;
                         var range1 = [start - 1 * 24*3600*1000, start + 1 * 24*3600*1000];
                         var range2 = [start + 2 * 24*3600*1000, start + 4 * 24*3600*1000];
                         var range3 = [start + 6 * 24*3600*1000, start + 9 * 24*3600*1000];
@@ -22,6 +23,7 @@
                         $scope.$watch('selected', function() {
                             console.log($scope.selected);
                         });
+                        
                     }]);
             })(window.angular);
         </script>
@@ -30,7 +32,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" ng-controller="appCtrl">
-                    <dtrange inactive-dates="inactive_dates" selected-dates="selected">
+                    <dtrange inactive-dates="inactive_dates" selected-dates="selected" min-date="{{ minDate }}">
                 </div>
             </div>
         </div>

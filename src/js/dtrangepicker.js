@@ -50,7 +50,8 @@
             
             scope : {
                 selectedDates: '=',
-                inactiveDates: '='
+                inactiveDates: '=',
+                minDate: '@'
             },
             
             link : function(scope, elem, attrs) {
@@ -65,11 +66,12 @@
                 });
                 
                 scope.$watch('selectedDates', function(val) {
-                    if (!val) {
-                        scope.selectedDates = [];
+                    if (!val || val.length == 0) {
                         scope.dt_calendar = new Date();
-                        scope.calendar = constructCalendar(scope.dt_calendar);
+                    } else {
+                        scope.dt_calendar = scope.selectedDates[0];
                     }
+                    scope.calendar = constructCalendar(scope.dt_calendar);
                 });
                 
                 scope.prevMonth = function() {
@@ -87,12 +89,37 @@
                 };
 
                 scope.select = function(dt) {
+                    
                     if (scope.selectedDates.length == 1) {
+                        if (scope.inactiveDates.length > 0) {
+                            for (var i=0; i<scope.inactiveDates.length; i++) {
+                                var range = scope.inactiveDates[i];
+                                
+                                var dt2 = dt;
+                                var dt1 = scope.selectedDates[0];
+                                if (scope.selectedDates[0] > dt) {
+                                    dt1 = dt;
+                                    dt2 = scope.selectedDates[0];
+                                }
+                                
+                                if ( (dt1 >= range[0] && dt1 <= range[1]) || 
+                                     (dt2 >= range[0] && dt2 <= range[1]) ||
+                                     (dt1 <= range[0] && dt2 >= range[1])) {
+                                    
+                                    //overlap, clear dates
+                                    scope.selectedDates = [];
+                                    return false;
+                                }
+                            }
+                        }
+                        
                         if (dt > scope.selectedDates[0]) {
                             scope.selectedDates.push(dt);
-                        } else {
+                        } 
+                        else {
                             if (dt < scope.selectedDates[0]) {
-                                scope.selectedDates.splice(0,0,dt);
+                                scope.selectedDates.splice(0, 0, dt);
+                                console.log(scope.selectedDates);
                             }
                             //if dt == scope.selectedDates[0] do nothing
                         }
@@ -103,11 +130,11 @@
                         
                     } else {
                         scope.selectedDates = [dt];
-                        
                     }
                 };
 
                 scope.getDateClass = function(dt) {
+                    
                     var inrange = false,
                         selected = false;
                         
@@ -125,8 +152,12 @@
                     }
                     
                     var classes = "";
+                    if (dt.value < scope.minDate) {
+                        classes = "disabled";
+                    }
+                    
                     if (inrange) {
-                        classes = 'inactive';
+                        classes = "inactive";
                     }
                     
                     if (selected) {
