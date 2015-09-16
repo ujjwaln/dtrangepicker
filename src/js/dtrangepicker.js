@@ -60,7 +60,9 @@
                 scope.mode = 'end';
                 
                 scope.$watch('inactiveDates', function(val) {
-                    if (scope.inactiveDates.length > 0) {
+                    if (scope.inactiveDates && scope.inactiveDates.hasOwnProperty('length') 
+                        && scope.inactiveDates.length > 0) {
+                            
                         scope.dt_calendar = scope.inactiveDates[0][0];
                     }
                 });
@@ -91,7 +93,7 @@
                 scope.select = function(dt) {
                     
                     if (scope.selectedDates.length == 1) {
-                        if (scope.inactiveDates.length > 0) {
+                        if (scope.inactiveDates && scope.inactiveDates.length > 0) {
                             for (var i=0; i<scope.inactiveDates.length; i++) {
                                 var range = scope.inactiveDates[i];
                                 
