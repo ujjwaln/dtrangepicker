@@ -10,18 +10,23 @@
             (function(angular) {
                 angular.module("app", ["dtrangepicker"])
                     .controller("appCtrl", ["$scope", function($scope) {
-                        $scope.start_date = new Date();
-                        $scope.end_date = new Date($scope.start_date.getTime() + 1000 * 3600 * 24);
+                        
+                        var start = Date.now();
+                        var range1 = [start - 1 * 24*3600*1000, start + 1 * 24*3600*1000];
+                        var range2 = [start + 2 * 24*3600*1000, start + 4 * 24*3600*1000];
+                        var range3 = [start + 6 * 24*3600*1000, start + 9 * 24*3600*1000];
+                        
+                        $scope.dates = [range1, range2, range3];
+                        console.log($scope.dates);
                     }]);
             })(window.angular);
         </script>
-        
     </head>
     <body ng-app="app">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12" ng-controller="appCtrl">
-                    <dtrange start-dt="start_date" end-dt="end_date">
+                    <dtrange inactive-dates="dates">
                 </div>
             </div>
         </div>
