@@ -16,6 +16,7 @@
                         var range3 = [start + 6 * 24*3600*1000, start + 9 * 24*3600*1000];
                         $scope.inactive_dates = [range1, range2, range3];
                         $scope.selected = [];
+                        
                         $scope.$watch('selected', function() {
                             console.log($scope.selected);
                         });

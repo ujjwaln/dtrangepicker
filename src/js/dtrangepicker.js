@@ -116,6 +116,14 @@
                     } else {
                         scope._selectedDates = [dt];
                     }
+                    
+                    $timeout(function() {
+                        scope.selectedDates = [];
+                        for (var j=0; j<scope._selectedDates.length; j++) {
+                            scope.selectedDates.push(scope._selectedDates[j]);
+                        }
+                        scope.$apply();
+                    });
                 };
                 scope.getDateClass = function(dt) {
                     var inrange = false,
