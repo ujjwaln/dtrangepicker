@@ -1,0 +1,25 @@
+
+.dtrangepicker {
+	text-align: center;
+}
+
+.dtrangepicker .date {
+	margin: 3px;
+}
+
+.dtrangepicker .disabled {
+	background-color: #eee;
+	pointer-events: none;
+	cursor: default;
+}
+
+.dtrangepicker .inactive {
+	background-color: #F00;
+	pointer-events: none;
+	cursor: default;
+}
+
+.dtrangepicker .selected {
+	background-color: #0F0;
+	cursor: pointer;
+}

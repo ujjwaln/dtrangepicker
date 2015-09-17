@@ -1,63 +1,20 @@
-<style>
-
-	.dtrangepicker {
-		text-align: center;
-	}
-	
-	.dtrangepicker .date {
-		margin: 3px;
-	}
-	
-	.dtrangepicker .disabled {
-        background-color: #eee;
-        pointer-events: none;
-        cursor: default;
-    }
-    
-	.dtrangepicker .inactive {
-	    background-color: #F00;
-        pointer-events: none;
-        cursor: default;
-	}
-	
-	.dtrangepicker .selected {
-        background-color: #0F0;
-        cursor: pointer;
-    }
-    
-</style>
-
-<div class="container dtrangepicker">
-    <div class="row">
-        <div class="col-xs-6">
-            <a class="btn" href="#">{{ startDt | date:'short' }}</a>
-        </div>
-        <div class="col-xs-6">
-            <a class="btn" href="#">{{ endDt | date:'short' }}</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th><a href="#" ng-click="prevMonth()">prev</a></th>
-                        <th colspan="5">{{ dt_calendar | date: 'MMMM yyyy' }}</th>
-                        <th><a href="#" ng-click="nextMonth()">next</a></th>
-                    </tr>
-                    <tr>
-                        <th ng-repeat="dow in dows track by $index">{{ dow }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="week in calendar track by $index">
-                        <!--td ng-repeat="dt in week track by $index" ng-class="{success: dt.current, active: dt.inrange}"-->
-                        <td ng-repeat="dt in week track by $index" ng-class="getDateClass(dt)">
-                            <a href="#" ng-click="select(dt.value);">{{ dt.value | date:'dd' }}</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<table class="dtrangepicker">
+    <thead>
+        <tr>
+            <th><a href="#" ng-click="prevMonth($event)">prev</a></th>
+            <th colspan="5">{{ dt_calendar | date: 'MMMM yyyy' }}</th>
+            <th><a href="#" ng-click="nextMonth($event)">next</a></th>
+        </tr>
+        <tr>
+            <th ng-repeat="dow in dows track by $index">{{ dow }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="week in calendar track by $index">
+            <!--td ng-repeat="dt in week track by $index" ng-class="{success: dt.current, active: dt.inrange}"-->
+            <td ng-repeat="dt in week track by $index" ng-class="getDateClass(dt)">
+                <a href="#" ng-click="select($event, dt.value);">{{ dt.value | date:'dd' }}</a>
+            </td>
+        </tr>
+    </tbody>
+</table>    

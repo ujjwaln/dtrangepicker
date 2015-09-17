@@ -1,7 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" type="text/css" href="src/css/style.css" />
         <script src="./bower_components/angular/angular.min.js"></script>
         <script src="./bower_components/moment/min/moment.min.js"></script>
         <script src="./bower_components/angular-moment/angular-moment.min.js"></script>
@@ -10,31 +9,23 @@
             (function(angular) {
                 angular.module("app", ["dtrangepicker"])
                     .controller("appCtrl", ["$scope", function($scope) {
-                        
                         var start = Date.now();
                         $scope.minDate = start - 3 * 24*3600*1000;
                         var range1 = [start - 1 * 24*3600*1000, start + 1 * 24*3600*1000];
                         var range2 = [start + 2 * 24*3600*1000, start + 4 * 24*3600*1000];
                         var range3 = [start + 6 * 24*3600*1000, start + 9 * 24*3600*1000];
-                        
                         $scope.inactive_dates = [range1, range2, range3];
                         $scope.selected = [];
-                        
                         $scope.$watch('selected', function() {
                             console.log($scope.selected);
                         });
-                        
                     }]);
             })(window.angular);
         </script>
     </head>
     <body ng-app="app">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12" ng-controller="appCtrl">
-                    <dtrange inactive-dates="inactive_dates" selected-dates="selected" min-date="{{ minDate }}">
-                </div>
-            </div>
+        <div ng-controller="appCtrl">
+            <dtrange inactive-dates="inactive_dates" selected-dates="selected" min-date="{{ minDate }}"></dtrange>
         </div>
     </body>
 </html>
